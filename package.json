@@ -1,5 +1,5 @@
 {
-  "name": "caller",
+  "name": "caller.js",
   "version": "1.0.0",
   "description": "get caller info",
   "main": "index.js",
