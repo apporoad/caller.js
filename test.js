@@ -7,4 +7,11 @@ var test = ()=>{
 //console.log(test())
 
 
+
 console.log(caller.getDir())
+
+var test2= ()=>{
+    console.log(caller.getDir())
+}
+
+test2()

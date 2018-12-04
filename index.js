@@ -13,7 +13,7 @@ var iPrint = callsite =>{
     console.log("isNative() : " + callsite.isNative())
 }
 
-exports.getInfo = () => {
+exports.getInfo = (depth) => {
     var pst, stack, file 
     var rightFrame = new Array()
 
@@ -24,11 +24,14 @@ exports.getInfo = () => {
     }
     stack = (new Error()).stack
     //console.trace()
-    stack = stack.slice(1)
+    depth = (!depth || isNaN(depth)) ? 2 : 2 + depth
+    stack =stack.slice(depth)
     do {
         var frame = stack.shift()
         file = frame && frame.getFileName()
         //iPrint(frame)
+
+        //console.log((frame || "")  + "  | " + frame.getFileName() )
         if(file != 'module.js' && file != 'bootstrap_node.js'){
             rightFrame.push(frame)
             break;
@@ -51,8 +54,11 @@ exports.getInfo = () => {
 }
 
 
-exports.getDir = ()=>{
-    var info = exports.getInfo()
-    return path.dirname(info.fileName)
+exports.getDir = (depth)=>{
+    depth = (!depth || isNaN(depth)) ? 1 : 1 + depth
+    var info = exports.getInfo(depth)
+    if(info)
+        return path.dirname(info.fileName)
+    return null
 }
 
