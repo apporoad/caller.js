@@ -53,6 +53,44 @@ exports.getInfo = (depth) => {
         return null
 }
 
+exports.getChain = depth =>{
+    var pst, stack, file 
+    var rightFrame = new Array()
+
+    pst = Error.prepareStackTrace
+    Error.prepareStackTrace = function (_, stack) {
+        Error.prepareStackTrace = pst
+        return stack
+    }
+    stack = (new Error()).stack
+    //console.trace()
+    depth = (!depth || isNaN(depth)) ? 2 : 2 + depth
+    stack =stack.slice(depth)
+    do {
+        var frame = stack.shift()
+        file = frame && frame.getFileName()
+        //iPrint(frame)
+
+        //console.log((frame || "")  + "  | " + frame.getFileName() )
+        if(file != 'module.js' && file != 'bootstrap_node.js'){
+            rightFrame.push(frame)
+        }
+    } while (stack.length)
+
+    var chain = new Array()
+    rightFrame.forEach(ele=>{
+        chain.push({
+            fileName : ele.getFileName(),
+            functionName : ele.getFunctionName(),
+            typeName : ele.getTypeName(),
+            lineNumber : ele.getLineNumber(),
+            cloumnNumber : ele.getColumnNumber(),
+            methodName : ele.getMethodName()
+        })
+    })
+    return chain
+}
+
 
 exports.getDir = (depth)=>{
     depth = (!depth || isNaN(depth)) ? 1 : 1 + depth
