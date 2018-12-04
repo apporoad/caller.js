@@ -1,0 +1,23 @@
+{
+  "name": "caller",
+  "version": "1.0.0",
+  "description": "get caller info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apporoad/caller.js.git"
+  },
+  "keywords": [
+    "caller"
+  ],
+  "author": "apporoad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apporoad/caller.js/issues"
+  },
+  "homepage": "https://github.com/apporoad/caller.js#readme",
+  "dependencies": {}
+}
