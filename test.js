@@ -39,3 +39,7 @@ var testChain4 = ()=>{
 }
 
 testChain1()
+
+
+var m1 = require('./others/1.js')
+m1.run()

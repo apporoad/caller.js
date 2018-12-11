@@ -100,3 +100,6 @@ exports.getDir = (depth)=>{
     return null
 }
 
+exports.getTopCallerDir = ()=>{
+    return path.dirname( exports.getChain().pop().fileName)
+}
