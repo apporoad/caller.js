@@ -13,6 +13,7 @@ var iPrint = callsite =>{
     console.log("isNative() : " + callsite.isNative())
 }
 
+
 exports.getInfo = (depth) => {
     var pst, stack, file 
     var rightFrame = new Array()
@@ -53,6 +54,8 @@ exports.getInfo = (depth) => {
         return null
 }
 
+exports.getCaller = exports.getInfo
+
 exports.getChain = depth =>{
     var pst, stack, file 
     var rightFrame = new Array()
@@ -91,6 +94,8 @@ exports.getChain = depth =>{
     return chain
 }
 
+exports.getCallers = exports.getChain
+
 
 exports.getDir = (depth)=>{
     depth = (!depth || isNaN(depth)) ? 1 : 1 + depth
@@ -102,4 +107,8 @@ exports.getDir = (depth)=>{
 
 exports.getTopCallerDir = ()=>{
     return path.dirname( exports.getChain().pop().fileName)
+}
+
+exports.getTopCaller = ()=>{
+    return exports.getChain().pop()
 }
